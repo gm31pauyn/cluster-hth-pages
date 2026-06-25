@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九游 · 知识库与站点说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fce4c8 0%, #f8d5b0 40%, #f3c89a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            line-height: 1.6;
+            color: #2e241b;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 249, 240, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 48px 24px 48px 24px;
+            box-shadow: 0 20px 40px -10px rgba(120, 70, 30, 0.2), 0 8px 16px -6px rgba(0,0,0,0.08);
+            padding: 2.5rem 2rem;
+            transition: all 0.2s ease;
+        }
+
+        /* 目录感布局：网格+卡片 */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 1.8rem;
+            margin: 2rem 0 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px 14px 28px 14px;
+            padding: 1.6rem 1.5rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(140, 90, 50, 0.08);
+            transition: all 0.1s ease;
+            border: 1px solid rgba(255, 220, 180, 0.4);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.6rem;
+            color: #5a3e2b;
+            border-left: 4px solid #dba978;
+            padding-left: 0.75rem;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #3f3229;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .card ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b8825a;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: left;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px dashed #e9cdb4;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 580;
+            letter-spacing: -0.02em;
+            color: #3b2a1d;
+            display: inline-block;
+            background: linear-gradient(135deg, #774f32, #a06b44);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #6f5541;
+            margin-top: 0.2rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 0.8rem;
+            background: #f9efe4;
+            border-radius: 60px 20px 60px 20px;
+            padding: 0.8rem 1.8rem;
+            margin: 1.8rem 0 1.2rem;
+            align-items: baseline;
+            font-size: 0.95rem;
+        }
+
+        .info-row span {
+            color: #5b4232;
+        }
+        .info-row .tag {
+            background: #dcb997;
+            color: #2f2017;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-like-link {
+            display: inline-block;
+            background: #e9d2bc;
+            color: #3c2a1d;
+            padding: 0.25rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: 0.15s;
+            border: 1px solid #dbba9b;
+        }
+
+        .btn-like-link:hover {
+            background: #dbba9b;
+            color: #1f140e;
+            border-color: #b8825a;
+        }
+
+        .faq-slim {
+            margin: 2rem 0 0.8rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem 1.5rem;
+            background: #faf1e7;
+            border-radius: 24px;
+            padding: 1.5rem 1.8rem;
+        }
+
+        .faq-item {
+            font-size: 0.9rem;
+        }
+
+        .faq-item strong {
+            color: #4d3526;
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+
+        .faq-item p {
+            color: #3f3024;
+        }
+
+        .action-note {
+            margin: 1.5rem 0 0.5rem;
+            padding: 1rem 1.8rem;
+            background: white;
+            border-radius: 80px 20px 80px 20px;
+            display: inline-block;
+            font-size: 0.95rem;
+            border: 1px solid #edd5bf;
+            box-shadow: 0 2px 6px rgba(100, 60, 30, 0.05);
+        }
+
+        .footnote {
+            margin-top: 2.2rem;
+            font-size: 0.85rem;
+            color: #5f4a39;
+            border-top: 1px solid #e6d3c0;
+            padding-top: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        a {
+            color: #6e4b30;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #dbb99b;
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: #3f281b;
+            text-decoration-color: #b8825a;
+        }
+
+        /* 响应式 */
+        @media (max-width: 720px) {
+            body { padding: 1.2rem; }
+            .container { padding: 1.8rem 1.2rem; }
+            .grid-layout { grid-template-columns: 1fr; gap: 1.2rem; }
+            .faq-slim { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+            .info-row { flex-direction: column; align-items: flex-start; padding: 0.8rem 1.2rem; border-radius: 30px 14px 30px 14px; }
+            .action-note { width: 100%; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 1.2rem 1rem; }
+            .card { padding: 1.2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- hero -->
+    <div class="hero">
+        <h1>九游 · 知识库索引</h1>
+        <div class="sub">站点说明 · 信息导览 · 可信参考</div>
+    </div>
+
+    <!-- 说明区 + 提示区 双列卡片 -->
+    <div class="grid-layout">
+        <div class="card">
+            <h3>站点背景</h3>
+            <p><a href="https://portal-ninegames.com">九游</a> 定位于提供游戏相关的聚合信息与工具入口。内容涵盖游戏资料、更新动态及实用查询。本站点不存储用户隐私数据，所有外部链接均经过基础校验。运营团队保持信息定期核实，提升内容可靠性。</p>
+            <p style="margin-top: 0.6rem;">数据来源包括合作方接口与公开资料，部分功能需联网调用。建议使用者结合自身判断。</p>
+        </div>
+        <div class="card">
+            <h3>使用指引</h3>
+            <ul>
+                <li>通过主导航可快速切换分类模块</li>
+                <li>每个游戏详情页均附带版本号与更新日期</li>
+                <li>搜索支持模糊匹配，结果按相关度排序</li>
+                <li>反馈入口位于页面底部，通常 24h 内回复</li>
+                <li>部分资源仅对注册用户开放（免费）</li>
+            </ul>
+            <p style="margin-top: 0.7rem; font-size: 0.9rem;">如需查阅完整协议，可联系站点维护方。</p>
+        </div>
+    </div>
+
+    <!-- 信息提示条（目录式标签） -->
+    <div class="info-row">
+        <span class="tag">▸ 信息分区</span>
+        <span><strong>资料库</strong> · 游戏档案 / 版本记录</span>
+        <span><strong>工具</strong> · 查询 / 计算 / 对照</span>
+        <span><strong>社区</strong> · 公告 / 讨论摘要</span>
+        <span><a href="https://portal-ninegames.com" class="btn-like-link">九游</a></span>
+    </div>
+
+    <!-- 特色卡片：两个场景/特点 -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 0.5rem 0 1.2rem;">
+        <div class="card" style="border-radius: 20px 20px 20px 40px;">
+            <h3>▸ 适用场景</h3>
+            <p>快速查阅游戏基础参数、版本变迁、活动时间线。适合玩家、攻略作者、轻度分析者。页面加载经过优化，弱网环境也可浏览文本内容。</p>
+        </div>
+        <div class="card" style="border-radius: 20px 20px 40px 20px;">
+            <h3>▸ 内容特点</h3>
+            <p>条目结构统一，减少冗余。每个词条均标注最后审核日期。引用外部资源时附来源标识。不展示未经核实的用户生成内容。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 (目录感) -->
+    <div class="faq-slim">
+        <div class="faq-item">
+            <strong>信息更新频率？</strong>
+            <p>主要游戏资料每月同步一次；紧急补丁或活动通常 48 小时内反映。</p>
+        </div>
+        <div class="faq-item">
+            <strong>是否收集个人数据？</strong>
+            <p>本站仅记录匿名访问量，不设置追踪 cookie。注册时仅需邮箱。</p>
+        </div>
+        <div class="faq-item">
+            <strong>链接失效怎么办？</strong>
+            <p>可通过站内“报告”按钮提交，维护周期约 2~5 个工作日。</p>
+        </div>
+        <div class="faq-item">
+            <strong>可否转载站内内容？</strong>
+            <p>简短引用需注明来自 <a href="https://portal-ninegames.com">九游</a>；批量使用请提前联系。</p>
+        </div>
+    </div>
+
+    <!-- 附加提示区 -->
+    <div class="action-note">
+        ⓘ 当前页面为静态信息索引版，核心入口已整合至上方导航与卡片。
+    </div>
+
+    <!-- footer 相关信息 -->
+    <div class="footnote">
+        <span>© 九游 · 知识库入口</span>
+        <span>建议分辨率 360px 以上 · 数据版本 2025.03</span>
+        <span><a href="https://portal-ninegames.com" style="text-decoration: underline;">九游</a></span>
+    </div>
+</div>
+</body>
+</html>
